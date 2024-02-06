@@ -10,13 +10,16 @@ internal class Program
     private static void Main(string[] args)
     {
         //Metoda InData() Pobiera informacje od urzytkownika,
-        //oraz za pomocą opcji zwraca text lub tylko wyświetla informacje tekstowe   
+        //oraz za pomocą opcji zwraca text lub tylko wyświetla informacje tekstowe lub wyświetla
+        //tekst naciśnij klawisz aby kontynuować 
         //1 zadanie tworzenie dwóch zmiennych int i sprawdzenie czy są równe 
         string a = "5", b = "5";
         int a1 = 0, b1 = 0;
-        if (int.TryParse(a, out a1) == int.TryParse(b, out b1))
+        int.TryParse(a, out a1);
+        int.TryParse(b, out b1);
+        if (a1 == b1)
         {
-            InData("liczba "+ a + " i liczba " + b + " są równe", 2);
+            InData("liczba " + a + " i liczba " + b + " są równe", 2);
         }
 
         //2 zadanie sprawdź czy liczba jest parzysta        
@@ -44,16 +47,15 @@ internal class Program
         {
             if (double.TryParse(InData("Podaj liczbę dodatią lub ujemną", 0, 1), out double number))
             {
-                if (number < 0 & number != 0)
+                if (number < 0)
                 {
                     InData(number + " jest liczbą ujemną", 2, 1);
-                    break;                  
+                    break;
                 }
-                else if (number > 0 & number != 0)
+                else if (number > 0)
                 {
                     InData(number + " jest liczbą dodatnią", 2, 1);
                     break;
-
                 }
             }
         }
@@ -63,7 +65,7 @@ internal class Program
         {
             if (int.TryParse(InData("Podaj rok to sprawdzę czy jest rokiem przestępnym", 0, 1), out int year))
             {
-                if (((year % 4 == 0 & year % 100 != 0 ) || year % 400 == 0) & year > 0)
+                if (((year % 4 == 0 & year % 100 != 0) || year % 400 == 0) & year > 0)
                 {
                     InData(year + " jest rokiem przestępnym ", 2, 1);
                     break;
@@ -80,15 +82,15 @@ internal class Program
         //5 zadanie na jakie stanowisko możesz kandydować
 
         while (true)
-        {            
-            if ((int.TryParse(InData("Podaj swój wiek ", 0, 1), out int year)) & year > 0) 
+        {
+            if ((int.TryParse(InData("Podaj swój wiek ", 0, 1), out int year)) & year > 0)
             {
                 if (year >= 21 & year < 30)
                 {
                     InData("Możesz zostać posłem", 2, 1);
                     break;
                 }
-                else if (year >= 30 & year < 35)             
+                else if (year >= 30 & year < 35)
                 {
                     InData("Możesz zostać posłem i senatorem", 2, 1);
                     break;
@@ -98,10 +100,12 @@ internal class Program
                     InData("Możesz zostać posłem,senatorem i prezydentem", 2, 1);
                     break;
                 }
-
-                year = 21 - year;
-                InData("Jeszcze poczekasz "+year+" lat zanim będziesz mógł ubiegać się o stanowisko posła", 2, 1);
-                break;
+                else
+                {
+                    year = 21 - year;
+                    InData("Jeszcze poczekasz " + year + " lat zanim będziesz mógł ubiegać się o stanowisko posła", 2, 1);
+                    break;
+                }
             }
         }
 
@@ -115,7 +119,7 @@ internal class Program
                     InData("Kategoria \"Szkrab\"", 2, 1);
                     break;
                 }
-                else if (grow >= 50 & grow <=69)
+                else if (grow >= 50 & grow <= 69)
                 {
                     InData("Kategoria \"Duży Szkrab\"", 2, 1);
                     break;
@@ -168,8 +172,8 @@ internal class Program
                 else
                 {
                     clear = 0;
-                    InData("Podaj prawidłową liczbę", 1, clear);                    
-                } 
+                    InData("Podaj prawidłową liczbę", 1, clear);
+                }
             }
         }
         int lastInSortedlist = list.Keys[2];
@@ -188,7 +192,7 @@ internal class Program
                         {
                             if ((int.TryParse(InData("Podaj Wynik z chemii", 0, 1), out int chemistry)) & chemistry >= 0)
                             {
-                                if ((mathematics > 70 & physics > 55 & chemistry > 45) || 
+                                if ((mathematics > 70 & physics > 55 & chemistry > 45) ||
                                     (mathematics + physics + chemistry > 180) ||
                                     (mathematics + physics > 150 || mathematics + chemistry > 150))
                                 {
@@ -243,7 +247,7 @@ internal class Program
                 break;
             }
         }
-      
+
         //10 zadanie pobiera trzy długości boków i zwraca informacje czy można stworzyć trójkąt
 
         while (true)
@@ -259,7 +263,7 @@ internal class Program
                         {
                             if ((int.TryParse(InData("Podaj długość odcinka c", 0, 1), out int length_c)) & length_c > 0)
                             {
-                                if (length_a +length_b > length_c )
+                                if (length_a + length_b > length_c)
                                 {
                                     InData("Można zbudować trójkąt", 2, 1);
                                 }
@@ -267,7 +271,7 @@ internal class Program
                                 {
                                     InData("brak możliwości stworzenia trójkąta ", 2, 1);
                                 }
-                                break;                               
+                                break;
                             }
                         }
                         break;
@@ -316,15 +320,15 @@ internal class Program
                 }
             }
         }
-    
+
         //12 zadanie pobiera numer dnia tygodnia i wyświetla nazwę dnia w języku angielskim
-        
+
         while (true)
         {
-            string  stringToIntDay = InData("Podaj numer dnia tygodnia:", 0, 1);            
-            if (int.TryParse(stringToIntDay, out int intDay) & intDay >0 & intDay <= 7)
+            string stringToIntDay = InData("Podaj numer dnia tygodnia:", 0, 1);
+            if (int.TryParse(stringToIntDay, out int intDay) & intDay > 0 & intDay <= 7)
             {
-                
+
                 InData("Angielska nazwa dnia numer " + intDay + " to:  " + (DayOfWeek)intDay, 2);
                 break;
             }
@@ -344,7 +348,7 @@ internal class Program
                     Calculate.CalculatorServicesView();
                     int calculations = Calculate.Number1 + Calculate.Number2;
                     Console.Clear();
-                    Console.WriteLine(Calculate.Number1+" + "+Calculate.Number2+" = "+calculations);
+                    Console.WriteLine(Calculate.Number1 + " + " + Calculate.Number2 + " = " + calculations);
                     Console.ReadKey();
                     break;
                 case '2':
@@ -361,7 +365,7 @@ internal class Program
                     Console.WriteLine(Calculate.Number1 + " * " + Calculate.Number2 + " = " + calculations);
                     Console.ReadKey();
                     break;
-                case '4':                    
+                case '4':
                     Calculate.CalculatorServicesView();
                     if (Calculate.Number2 == 0)
                     {
@@ -398,7 +402,7 @@ internal class Program
             if (clear_console == 1)
             {
                 Console.Clear();
-            }            
+            }
             Console.WriteLine(text);
 
             if (empty == 1)
@@ -414,11 +418,11 @@ internal class Program
                     Console.ReadKey();
                     outtext = "";
                     return outtext;
-                }                
+                }
             }
 
-            
-            
+
+
             return outtext = Console.ReadLine();
         }
     }
